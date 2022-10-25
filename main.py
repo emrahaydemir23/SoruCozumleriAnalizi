@@ -26,7 +26,7 @@ df3.columns = ["Kitap Adı","Son Çözülme Zamanı"]
 
 
 df4 = ps.sqldf("select [Ders Adı], sum([Doğru Sayısı]) as [Doğru Sayısı], sum([Yanlış Sayısı]) as [Yanlış Sayısı], sum([Boş Sayısı]) as [Boş Sayısı], sum([Doğru Sayısı])+sum([Yanlış Sayısı])+sum([Boş Sayısı]) as [ToplamSoruSayisi], (sum([Doğru Sayısı])-(sum([Yanlış Sayısı])/3)) as [NetSayisi],(sum([Doğru Sayısı])-(sum([Yanlış Sayısı])/3))*100.0/(sum([Doğru Sayısı])+sum([Yanlış Sayısı])+sum([Boş Sayısı])) as [NetOrani] from df group by [Ders Adı]")
-df4 = df4.sort_values(by='NetOrani', ascending=False)
+df4 = ps.sqldf("select * from df4 order by [NetOrani]")
 ax = df4.plot.bar(x='Ders Adı', y='NetOrani', rot=0)
 #plt.show(block=True)
 
