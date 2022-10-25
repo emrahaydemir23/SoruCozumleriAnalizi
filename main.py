@@ -31,12 +31,10 @@ df4 = ps.sqldf("select * from df4 order by [Net Oranı]")
 
 
 st.set_page_config(page_title="Soru Çözümleri Analizleri", layout="wide", page_icon=":+1:") # https://www.webfx.com/tools/emoji-cheat-sheet/
+st.title("EBUBEKİR AYDEMİR")
 st.title("SORU ÇÖZÜMLERİ ANALİZLERİ")
 
 st.subheader("Ders Bazlı Toplam Doğru, Yanlış ve Boş Sayıları")
-st.write(df1.head())
-
-st.subheader("Ders Bazlı Net Oranları")
 st.write(df1.head())
 
 st.subheader("Derslerin En Son Çözülme Zamanları")
