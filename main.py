@@ -25,10 +25,8 @@ df3.columns = ["Kitap Adı","Son Çözülme Zamanı"]
 #print(df3.head())
 
 
-df4 = ps.sqldf("select [Ders Adı], sum([Doğru Sayısı]) as [Doğru Sayısı], sum([Yanlış Sayısı]) as [Yanlış Sayısı], sum([Boş Sayısı]) as [Boş Sayısı], sum([Doğru Sayısı])+sum([Yanlış Sayısı])+sum([Boş Sayısı]) as [ToplamSoruSayisi], (sum([Doğru Sayısı])-(sum([Yanlış Sayısı])/3)) as [NetSayisi],(sum([Doğru Sayısı])-(sum([Yanlış Sayısı])/3))*100.0/(sum([Doğru Sayısı])+sum([Yanlış Sayısı])+sum([Boş Sayısı])) as [NetOrani] from df group by [Ders Adı]")
-df4 = ps.sqldf("select * from df4 order by [NetOrani]")
-ax = df4.plot.bar(x='Ders Adı', y='NetOrani', rot=0)
-#plt.show(block=True)
+df4 = ps.sqldf("select [Ders Adı], sum([Doğru Sayısı]) as [Doğru], sum([Yanlış Sayısı]) as [Yanlış], sum([Boş Sayısı]) as [Boş], sum([Doğru Sayısı])+sum([Yanlış Sayısı])+sum([Boş Sayısı]) as [Toplam Soru], (sum([Doğru Sayısı])-(sum([Yanlış Sayısı])/3)) as [Net],(sum([Doğru Sayısı])-(sum([Yanlış Sayısı])/3))*100.0/(sum([Doğru Sayısı])+sum([Yanlış Sayısı])+sum([Boş Sayısı])) as [Net Oranı] from df group by [Ders Adı]")
+df4 = ps.sqldf("select * from df4 order by [Net Oranı]")
 
 
 
@@ -49,11 +47,11 @@ st.write(df3.head())
 
 st.subheader("Derslere Göre Net Oranları")
 with st.container():
-    left, right = st.columns((2,1))#2 birime 1 birim olacak şekilde sütunlara böl
+    left, right = st.columns((3,2))#2 birime 1 birim olacak şekilde sütunlara böl
     with left:
         st.write(df4.head())
     with right:
-        st.bar_chart(data=df4, x='Ders Adı', y='NetOrani', width=0, height=0, use_container_width=True)
+        st.bar_chart(data=df4, x='Ders Adı', y='Net Oranı', width=0, height=0, use_container_width=True)
 
 
-#st.bar_chart(df5)
+
