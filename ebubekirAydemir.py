@@ -14,7 +14,7 @@ df1 = df.groupby(["Ders Adı"])[["Doğru Sayısı", "Yanlış Sayısı", "Boş S
 #df2 = df.sort_values(by='Zaman damgası', ascending=False)
 df2 = ps.sqldf("Select [Ders Adı],max([Zaman damgası]) as [Son Çözüm Zamanı] from df group by [Ders Adı]")
 df2['Son Çözüm Zamanı'] = pd.to_datetime(df2['Son Çözüm Zamanı'])
-df2["Geçen Gün Sayısı"] = (datetime.datetime.now()-df2["Son Çözüm Zamanı"]).dt.days
+df2["Geçen Gün Sayısı"] = str(datetime.datetime.now()-df2["Son Çözüm Zamanı"])
 
 df3 = df.sort_values(by='Zaman damgası', ascending=False)
 df3 = df3.groupby(["Kitap Adı"])["Zaman damgası"].max()
