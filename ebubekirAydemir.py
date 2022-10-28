@@ -12,14 +12,14 @@ df['Zaman damgası'] = pd.to_datetime(df['Zaman damgası'])
 df1 = df.groupby(["Ders Adı"])[["Doğru Sayısı", "Yanlış Sayısı", "Boş Sayısı", "Çözüm Süresi"]].sum()
 
 #df2 = df.sort_values(by='Zaman damgası', ascending=False)
-df2 = ps.sqldf("Select [Ders Adı],max([Zaman damgası]) as [Zaman],sum([Çözüm Süresi])/sum([Toplam Sayı]) as [Ortalama Çözüm Süresi], count([Zaman damgası]) as [Çözüm Sayısı] from df group by [Ders Adı]")
+df2 = ps.sqldf("Select [Ders Adı],max([Zaman damgası]) as [Zaman],sum([Çözüm Süresi])*1.0/sum([Toplam Sayı]) as [Ortalama Çözüm Süresi], count([Zaman damgası]) as [Çözüm Sayısı] from df group by [Ders Adı]")
 #df2['Zaman'] = pd.to_datetime(df2['Zaman'])
 #df2["Geçen Gün Sayısı"] = (datetime.datetime.now()-df2["Zaman"]).dt.days
 
 #df3 = df.sort_values(by='Zaman damgası', ascending=False)
 #df3 = df3.groupby(["Kitap Adı"])["Zaman damgası"].max()
 #df3.columns = ["Kitap Adı","Son Çözülme Zamanı"]
-df3 = ps.sqldf("Select [Kitap Adı],max([Zaman damgası]) as [Zaman],sum([Çözüm Süresi])/sum([Toplam Sayı]) as [Ortalama Çözüm Süresi], count([Zaman damgası]) as [Çözüm Sayısı] from df group by [Kitap Adı]")
+df3 = ps.sqldf("Select [Kitap Adı],max([Zaman damgası]) as [Zaman],sum([Çözüm Süresi])*1.0/sum([Toplam Sayı]) as [Ortalama Çözüm Süresi], count([Zaman damgası]) as [Çözüm Sayısı] from df group by [Kitap Adı]")
 
 df4 = ps.sqldf("select [Ders Adı], sum([Doğru Sayısı]) as [Doğru], sum([Yanlış Sayısı]) as [Yanlış], sum([Boş Sayısı]) as [Boş], sum([Doğru Sayısı])+sum([Yanlış Sayısı])+sum([Boş Sayısı]) as [Toplam Soru], (sum([Doğru Sayısı])-(sum([Yanlış Sayısı])/3)) as [Net],(sum([Doğru Sayısı])-(sum([Yanlış Sayısı])/3))*100.0/(sum([Doğru Sayısı])+sum([Yanlış Sayısı])+sum([Boş Sayısı])) as [Net Oranı] from df group by [Ders Adı]")
 df4 = ps.sqldf("select * from df4 order by [Net Oranı]")
