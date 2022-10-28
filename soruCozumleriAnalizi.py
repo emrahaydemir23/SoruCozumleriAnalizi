@@ -6,11 +6,11 @@ import matplotlib.pyplot as plt
 herkeseAcikLink, kisiAdi = "", ""
 try:
     parametre = st.experimental_get_query_params()
-    tc = parametre["kisi"][0]
-    if tc == "11855128832":
+    parametre = parametre["kisi"][0]
+    if parametre == "ebubekir":
         herkeseAcikLink = "https://docs.google.com/spreadsheets/d/1-Uk2ly4wHQqWoohMOpuGMKdUlLhG8B0uQzp88hL8cu8/edit#gid=702254161"
         kisiAdi = "EBUBEKİR AYDEMİR"
-    elif tc == "123":
+    elif parametre == "arda":
         herkeseAcikLink = "https://docs.google.com/spreadsheets/d/1JUw8t4WIHo3eUSMQs62cC4RS7LFLnX4Ww8UZnlYv_xM/edit#gid=913864078"
         kisiAdi = "ARDA BULUT"
     
