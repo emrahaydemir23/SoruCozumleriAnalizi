@@ -71,6 +71,8 @@ try:
     for index, row in df6.iterrows():
         st.write(row['Ders Adı'])
         st.line_chart(ps.sqldf(f"select [Doğru Oranı],[Yanlış Oranı],[Boş Oranı] from df5 where [Ders Adı]='{row['Ders Adı']}'"))
+    
+    st.print(sidebar=False, printer="PDF")
 except:
     pass
 
