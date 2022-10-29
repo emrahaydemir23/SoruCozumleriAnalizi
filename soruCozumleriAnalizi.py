@@ -20,6 +20,7 @@ try:
     url_1 = herkeseAcikLink.replace('/edit#gid=', '/export?format=csv&gid=')
     df = pd.read_csv(url_1)
     df["Toplam Sayı"] = df["Doğru Sayısı"]+df["Yanlış Sayısı"]+df["Boş Sayısı"]
+    df['Gun'] = pd.to_datetime(df['Zaman damgası'].str[:10])
     df['Zaman damgası'] = pd.to_datetime(df['Zaman damgası'])
 
     df1 = df.groupby(["Ders Adı"])[["Doğru Sayısı", "Yanlış Sayısı", "Boş Sayısı", "Çözüm Süresi"]].sum()
