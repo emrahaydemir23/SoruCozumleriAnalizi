@@ -40,6 +40,8 @@ try:
 
     df5 = ps.sqldf("select [Ders Adı],[Doğru Sayısı]*100.0/[Toplam Sayı] as [Doğru Oranı],[Yanlış Sayısı]*100.0/[Toplam Sayı] as [Yanlış Oranı],[Boş Sayısı]*100.0/[Toplam Sayı] as [Boş Oranı] from df")
 
+    df6 = ps.sqldf("Select Gun as [Gün],sum([Toplam Sayı]) as [Toplam Sayı] from df group by Gun order by Gun desc")
+    
     st.set_page_config(page_title="Soru Çözümleri Analizleri", layout="wide", page_icon=":+1:") # https://www.webfx.com/tools/emoji-cheat-sheet/
     st.title(kisiAdi)
     st.title("SORU ÇÖZÜMLERİ ANALİZLERİ")
@@ -52,6 +54,9 @@ try:
 
     st.subheader("Kitapların En Son Çözülme Zamanları")
     st.write(df3)
+    
+    st.subheader("Günlere Göre Toplam Soru Sayıları")
+    st.line_chart(df6,x='Gün', y='Toplam Sayı')
 
     st.subheader("Derslere Göre Toplam Net Oranları")
     with st.container():
