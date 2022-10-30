@@ -33,9 +33,9 @@ try:
     #df3 = df.sort_values(by='Zaman damgası', ascending=False)
     #df3 = df3.groupby(["Kitap Adı"])["Zaman damgası"].max()
     #df3.columns = ["Kitap Adı","Son Çözülme Zamanı"]
-    df3 = ps.sqldf("Select [Kitap Adı],max([Zaman damgası]) as [Zaman],sum([Çözüm Süresi])*1.0/sum([Toplam Sayı]) as [Ortalama Çözüm Süresi], count([Zaman damgası]) as [Çözüm Sayısı],sum([Toplam Sayı]) as [Bugüne Kadar Toplam Soru Sayısı] from df group by [Kitap Adı]")
+    df3 = ps.sqldf("Select [Kitap Adı],max([Zaman damgası]) as [Zaman],sum([Çözüm Süresi])*1.0/sum([Toplam Sayı]) as [Ortalama Çözüm Süresi], count([Zaman damgası]) as [Çözüm Sayısı],sum([Toplam Sayı]) as [Bugüne Kadar Toplam Soru Sayısı], (sum([Doğru Sayısı])-(sum([Yanlış Sayısı])/3))*100.0/(sum([Toplam Sayı])) as [Net Oranı] from df group by [Kitap Adı]")
 
-    df4 = ps.sqldf("select [Ders Adı], sum([Doğru Sayısı]) as [Doğru], sum([Yanlış Sayısı]) as [Yanlış], sum([Boş Sayısı]) as [Boş], sum([Doğru Sayısı])+sum([Yanlış Sayısı])+sum([Boş Sayısı]) as [Toplam Soru], (sum([Doğru Sayısı])-(sum([Yanlış Sayısı])/3)) as [Net],(sum([Doğru Sayısı])-(sum([Yanlış Sayısı])/3))*100.0/(sum([Doğru Sayısı])+sum([Yanlış Sayısı])+sum([Boş Sayısı])) as [Net Oranı] from df group by [Ders Adı]")
+    df4 = ps.sqldf("select [Ders Adı], sum([Doğru Sayısı]) as [Doğru], sum([Yanlış Sayısı]) as [Yanlış], sum([Boş Sayısı]) as [Boş], sum([Doğru Sayısı])+sum([Yanlış Sayısı])+sum([Boş Sayısı]) as [Toplam Soru], (sum([Doğru Sayısı])-(sum([Yanlış Sayısı])/3)) as [Net],(sum([Doğru Sayısı])-(sum([Yanlış Sayısı])/3))*100.0/(sum([Toplam Sayı])) as [Net Oranı] from df group by [Ders Adı]")
     df4 = ps.sqldf("select * from df4 order by [Net Oranı]")
 
     df5 = ps.sqldf("select [Ders Adı],[Doğru Sayısı]*100.0/[Toplam Sayı] as [Doğru Oranı],[Yanlış Sayısı]*100.0/[Toplam Sayı] as [Yanlış Oranı],[Boş Sayısı]*100.0/[Toplam Sayı] as [Boş Oranı] from df")
