@@ -22,11 +22,12 @@ try:
     df["Toplam Sayı"] = df["Doğru Sayısı"]+df["Yanlış Sayısı"]+df["Boş Sayısı"]
     df['Gun'] = pd.to_datetime(df['Zaman damgası'].str[:10])
     df['Zaman damgası'] = pd.to_datetime(df['Zaman damgası'])
+    genelToplamSure = df["Çözüm Süresi"].sum()
 
     #df1 = df.groupby(["Ders Adı"])[["Doğru Sayısı", "Yanlış Sayısı", "Boş Sayısı", "Çözüm Süresi"]].sum()
 
     #df2 = df.sort_values(by='Zaman damgası', ascending=False)
-    df2 = ps.sqldf("Select [Ders Adı],max([Zaman damgası]) as [Zaman],sum([Çözüm Süresi])*1.0/sum([Toplam Sayı]) as [Ortalama Çözüm Süresi], count([Zaman damgası]) as [Çözüm Sayısı],sum([Toplam Sayı]) as [Bugüne Kadar Toplam Soru Sayısı] from df group by [Ders Adı]")
+    df2 = ps.sqldf(f"Select [Ders Adı],max([Zaman damgası]) as [Zaman],sum([Çözüm Süresi])*1.0/sum([Toplam Sayı]) as [Ortalama Çözüm Süresi], count([Zaman damgası]) as [Çözüm Sayısı],sum([Toplam Sayı]) as [Bugüne Kadar Toplam Soru Sayısı],sum([Çözüm Süresi])*100.0/{genelToplamSure} as [Toplam Zaman Oranı] from df group by [Ders Adı]")
     #df2['Zaman'] = pd.to_datetime(df2['Zaman'])
     #df2["Geçen Gün Sayısı"] = (datetime.datetime.now()-df2["Zaman"]).dt.days
 
