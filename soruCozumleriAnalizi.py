@@ -23,7 +23,7 @@ try:
     df['Gun'] = pd.to_datetime(df['Zaman damgası'].str[:10])
     df['Zaman damgası'] = pd.to_datetime(df['Zaman damgası'])
 
-    df1 = df.groupby(["Ders Adı"])[["Doğru Sayısı", "Yanlış Sayısı", "Boş Sayısı", "Çözüm Süresi"]].sum()
+    #df1 = df.groupby(["Ders Adı"])[["Doğru Sayısı", "Yanlış Sayısı", "Boş Sayısı", "Çözüm Süresi"]].sum()
 
     #df2 = df.sort_values(by='Zaman damgası', ascending=False)
     df2 = ps.sqldf("Select [Ders Adı],max([Zaman damgası]) as [Zaman],sum([Çözüm Süresi])*1.0/sum([Toplam Sayı]) as [Ortalama Çözüm Süresi], count([Zaman damgası]) as [Çözüm Sayısı],sum([Toplam Sayı]) as [Bugüne Kadar Toplam Soru Sayısı] from df group by [Ders Adı]")
@@ -46,9 +46,14 @@ try:
     st.title(kisiAdi)
     st.title("SORU ÇÖZÜMLERİ ANALİZLERİ")
 
-    st.subheader("Ders Bazlı Toplam Doğru, Yanlış ve Boş Sayıları")
-    st.write(df1)
-
+    st.subheader("Derslere Göre Analizler")
+    with st.container():
+        left, right = st.columns((3,2))#2 birime 1 birim olacak şekilde sütunlara böl
+        with left:
+            st.write(df4)
+        with right:
+            st.bar_chart(data=df4, x='Ders Adı', y='Net Oranı', width=0, height=0, use_container_width=True)
+    
     st.subheader("Derslerin En Son Çözülme Zamanları")
     st.write(df2)
 
@@ -57,14 +62,6 @@ try:
     
     st.subheader("Günlere Göre Toplam Soru Sayıları")
     st.line_chart(df6,x='Gün', y='Toplam Sayı')
-
-    st.subheader("Derslere Göre Toplam Net Oranları")
-    with st.container():
-        left, right = st.columns((3,2))#2 birime 1 birim olacak şekilde sütunlara böl
-        with left:
-            st.write(df4)
-        with right:
-            st.bar_chart(data=df4, x='Ders Adı', y='Net Oranı', width=0, height=0, use_container_width=True)
 
     st.subheader("Derslere Göre Doğru, Yanlış, Boş Oranları")
     df6 = ps.sqldf("Select distinct [Ders Adı] from df")
