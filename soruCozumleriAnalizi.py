@@ -27,7 +27,7 @@ try:
     #df1 = df.groupby(["Ders Adı"])[["Doğru Sayısı", "Yanlış Sayısı", "Boş Sayısı", "Çözüm Süresi"]].sum()
 
     #df2 = df.sort_values(by='Zaman damgası', ascending=False)
-    df2 = ps.sqldf("Select [Ders Adı],max([Zaman damgası]) as [Zaman],sum([Çözüm Süresi])*1.0/sum([Toplam Sayı]) as [Ortalama Çözüm Süresi], count([Zaman damgası]) as [Çözüm Sayısı],sum([Toplam Sayı]) as [Bugüne Kadar Toplam Soru Sayısı] from df group by [Ders Adı]")
+    df2 = ps.sqldf("Select [Ders Adı],max([Zaman damgası]) as [Zaman],sum([Çözüm Süresi])*1.0/sum([Toplam Sayı]) as [Ortalama Çözüm Süresi], count([Zaman damgası]) as [Çözüm Sayısı],sum([Toplam Sayı]) as [Bugüne Kadar Toplam Soru Sayısı] from df group by [Ders Adı] order by max([Zaman damgası]) desc")
     #df2['Zaman'] = pd.to_datetime(df2['Zaman'])
     #df2["Geçen Gün Sayısı"] = (datetime.datetime.now()-df2["Zaman"]).dt.days
 
