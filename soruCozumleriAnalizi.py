@@ -69,7 +69,7 @@ try:
     
     st.subheader("Genel Bilgiler")
     #st.write(df7)
-    st.dataframe(df7, 400, 400)
+    st.dataframe(df7, 600, 500)
     
     st.subheader("Ders Net Oranları")
     st.bar_chart(data=df4, x='Ders Adı', y='Net Oranı', width=0, height=0, use_container_width=True)       
