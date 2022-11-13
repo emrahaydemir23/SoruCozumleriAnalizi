@@ -56,6 +56,8 @@ try:
     df7.loc[len(df7.index)] = ['Toplam Kitap', genelToplamKitapSayisi]
     df7.loc[len(df7.index)] = ['Ortalama Net Oranı', df3["Net Oranı"].mean()]
     df7.loc[len(df7.index)] = ['Son Çözüm Zamanı', df["Zaman damgası"].max()]
+    df7.loc[len(df7.index)] = ['En Eski Çözülen Kitap', df3.sort_values(by=['Son Çözüm Zamanı'],ascending=False).iloc[-1]["Kitap Adı"]]
+    df7.loc[len(df7.index)] = ['En Az Soru Çözülen Kitap', df3.sort_values(by=['Toplam'],ascending=False).iloc[-1]["Kitap Adı"]]
     
     st.set_page_config(page_title="Soru Çözümleri Analizleri", layout="wide", page_icon=":+1:") # https://www.webfx.com/tools/emoji-cheat-sheet/
     st.title(kisiAdi)
