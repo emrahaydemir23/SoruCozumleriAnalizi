@@ -44,12 +44,27 @@ try:
 
     df6 = ps.sqldf("Select Gun as [Gün],sum([Toplam Sayı]) as [Toplam Sayı] from df group by Gun order by Gun desc")
     
+    genelToplamSure = df["Çözüm Süresi"].sum()
+    genelToplamGun = len(pd.unique(df['Gun']))
+    genelToplamSoru = df["Toplam Sayı"].sum()
+    genelToplamKitapSayisi = len(pd.unique(df['Kitap Adı']))
+    df7 = pd.DataFrame({'Türü': pd.Series(dtype='str'), 'Değer': pd.Series(dtype='str')})
+    df7.loc[len(df7.index)] = ['Toplam Süre', '{:02d}:{:02d}'.format(*divmod(genelToplamSure, 60))]
+    df7.loc[len(df7.index)] = ['Günlük Ortalama Süre', '{:02d}:{:02d}'.format(*divmod(int(genelToplamSure/genelToplamGun), 60))]
+    df7.loc[len(df7.index)] = ['Toplam Soru', genelToplamSoru]
+    df7.loc[len(df7.index)] = ['Toplam Gün', genelToplamGun]
+    df7.loc[len(df7.index)] = ['Toplam Kitap', genelToplamKitapSayisi]
+    df7.loc[len(df7.index)] = ['Ortalama Net Oranı', df3["Net Oranı"].mean()]
+    
     st.set_page_config(page_title="Soru Çözümleri Analizleri", layout="wide", page_icon=":+1:") # https://www.webfx.com/tools/emoji-cheat-sheet/
     st.title(kisiAdi)
     st.title("SORU ÇÖZÜMLERİ ANALİZLERİ")
-
+    
+    st.subheader("Genel Bilgiler")
+    st.write(df7)
+    
     st.subheader("Ders Net Oranları")
-    st.bar_chart(data=df4, x='Ders Adı', y='Net Oranı', width=0, height=0, use_container_width=True)
+    st.bar_chart(data=df4, x='Ders Adı', y='Net Oranı', width=0, height=0, use_container_width=True)       
     
     st.subheader("Derslere Göre Detaylı Analizler")
     st.write(df4)
