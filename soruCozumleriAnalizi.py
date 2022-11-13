@@ -55,6 +55,7 @@ try:
     df7.loc[len(df7.index)] = ['Toplam Gün', genelToplamGun]
     df7.loc[len(df7.index)] = ['Toplam Kitap', genelToplamKitapSayisi]
     df7.loc[len(df7.index)] = ['Ortalama Net Oranı', df3["Net Oranı"].mean()]
+    df7.loc[len(df7.index)] = ['Son Çözüm Zamanı', df["Zaman damgası"].max()]
     
     st.set_page_config(page_title="Soru Çözümleri Analizleri", layout="wide", page_icon=":+1:") # https://www.webfx.com/tools/emoji-cheat-sheet/
     st.title(kisiAdi)
