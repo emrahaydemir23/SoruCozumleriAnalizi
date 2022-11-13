@@ -47,13 +47,17 @@ try:
     st.title(kisiAdi)
     st.title("SORU ÇÖZÜMLERİ ANALİZLERİ")
 
-    st.subheader("Derslere Göre Analizler")
-    with st.container():
-        left, right = st.columns((3,2))#2 birime 1 birim olacak şekilde sütunlara böl
-        with left:
-            st.write(df4)
-        with right:
-            st.bar_chart(data=df4, x='Ders Adı', y='Net Oranı', width=0, height=0, use_container_width=True)
+    st.subheader("Ders Net Oranları")
+    st.bar_chart(data=df4, x='Ders Adı', y='Net Oranı', width=0, height=0, use_container_width=True)
+    
+    st.subheader("Derslere Göre Detaylı Analizler")
+    st.write(df4)
+    #with st.container():
+        #left, right = st.columns((3,2))#2 birime 1 birim olacak şekilde sütunlara böl
+        #with left:
+            #st.write(df4)
+        #with right:
+            #st.bar_chart(data=df4, x='Ders Adı', y='Net Oranı', width=0, height=0, use_container_width=True)
     
     st.subheader("Derslerin En Son Çözülme Zamanları")
     st.write(df2)
