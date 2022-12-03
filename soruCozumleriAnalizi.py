@@ -56,7 +56,7 @@ try:
     df7.loc[len(df7.index)] = ['Toplam Kitap', genelToplamKitapSayisi]
     df7.loc[len(df7.index)] = ['Ortalama Net Oranı', df3["Net Oranı"].mean()]
     df7.loc[len(df7.index)] = ['Son Çözüm Zamanı', df["Zaman damgası"].max()]
-    df7.loc[len(df7.index)] = ['Son Çözüm Sayısı', df6.iloc[-1]["Toplam Sayı"]]
+    df7.loc[len(df7.index)] = ['Son Çözüm Sayısı', df6.iloc[0]["Toplam Sayı"]]
     df7.loc[len(df7.index)] = ['En Eski Çözülen Kitap', df3.sort_values(by=['Son Çözüm Zamanı'],ascending=False).iloc[-1]["Kitap Adı"]]
     df7.loc[len(df7.index)] = ['En Az Soru Çözülen Kitap', df3.sort_values(by=['Toplam'],ascending=False).iloc[-1]["Kitap Adı"]]    
     df7.loc[len(df7.index)] = ['En Az Net Oranı Olan Kitap', df3.sort_values(by=['Net Oranı'],ascending=False).iloc[-1]["Kitap Adı"]]
