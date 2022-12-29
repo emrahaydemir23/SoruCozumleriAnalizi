@@ -89,6 +89,7 @@ try:
     
     st.subheader("Günlere Göre Toplam Soru Sayıları")
     st.line_chart(df6,x='Gün', y='Toplam Sayı')
+    st.write(df6.sort_values(by=['Gün'], ascending=False))
 
     st.subheader("Derslere Göre Doğru, Yanlış, Boş Oranları")
     df6 = ps.sqldf("Select distinct [Ders Adı] from df")
