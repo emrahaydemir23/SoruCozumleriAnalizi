@@ -16,6 +16,9 @@ try:
     elif parametre == "kemal":
         herkeseAcikLink = "https://docs.google.com/spreadsheets/d/1juF8-z_xHQw_FkGRReHCIlezK1QciT-W1dAFLo2SJUY/edit#gid=1046222950"
         kisiAdi = "KEMAL KURT"
+    elif parametre == "muhammed":
+        herkeseAcikLink = "https://docs.google.com/spreadsheets/d/1_NIG5x24GqaLepri8y6QwFg2E2VLuQDGve_z5MS2QxQ/edit#gid=1689223933"
+        kisiAdi = "MUHAMMED AYDEMİR"
     
     url_1 = herkeseAcikLink.replace('/edit#gid=', '/export?format=csv&gid=')
     df = pd.read_csv(url_1)
